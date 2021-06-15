@@ -9,7 +9,3 @@
     name: 'palette-editor'
   }
 </script>
-
-<style>
-  /* CSS */
-</style>
