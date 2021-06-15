@@ -1,0 +1,15 @@
+<template>
+  <div id="app">
+    <router-view></router-view>
+  </div>
+</template>
+
+<script>
+  export default {
+    name: 'palette-editor'
+  }
+</script>
+
+<style>
+  /* CSS */
+</style>

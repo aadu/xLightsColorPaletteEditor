@@ -1,0 +1,26 @@
+version: "3"
+services:
+  traefik:
+    container_name: traefik
+    image: traefik:v2.4
+    command:
+      - "--api.insecure=true"
+      - "--providers.docker=true"
+      - "--entrypoints.web.address=:80"
+    ports: ["80:80", "8080:8080"]
+    volumes: [/var/run/docker.sock:/var/run/docker.sock:ro]
+  node:
+    build: .
+    container_name: node
+    environment:
+      - NODE_OPTIONS=--max_old_space_size=4096
+    volumes:
+      - ".:/code"
+      - "node_modules:/code/node_modules"
+    labels:
+      - "traefik.http.routers.node.rule=PathPrefix(`/`)"
+      - "traefik.http.services.node.loadbalancer.server.port=3000"
+    command: bash -c "yarn dev"
+    ports: ["3000:3000"]
+volumes:
+  node_modules:
