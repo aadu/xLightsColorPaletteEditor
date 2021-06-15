@@ -12,6 +12,14 @@ RUN apt-get update \
     xz-utils \
     ca-certificates \
     g++ \
+    libx11-xcb1 \
+    libxcb-dri3-0 \
+    libxtst6 \
+    libgconf-2-4 \
+    libnss3 \
+    libatk-bridge2.0-0 \
+    libgtk-3-0 libxss1 \
+    libasound2 \
     build-essential \
     python3 \
 	&& apt-get -y --purge autoremove \
@@ -35,7 +43,7 @@ WORKDIR /code
 RUN yarn
 
 COPY . /code
-RUN yarn build
+# RUN yarn build
 # production server
 CMD yarn start
 EXPOSE 8080 3000 80 443

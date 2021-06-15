@@ -1,7 +1,7 @@
 version: "3"
 services:
-  traefik:
-    container_name: traefik
+  proxy:
+    container_name: proxy
     image: traefik:v2.4
     command:
       - "--api.insecure=true"
@@ -19,8 +19,8 @@ services:
       - "node_modules:/code/node_modules"
     labels:
       - "traefik.http.routers.node.rule=PathPrefix(`/`)"
-      - "traefik.http.services.node.loadbalancer.server.port=3000"
+      - "traefik.http.services.node.loadbalancer.server.port=9080"
     command: bash -c "yarn dev"
-    ports: ["3000:3000"]
+    ports: ["9080:9080"]
 volumes:
   node_modules:
